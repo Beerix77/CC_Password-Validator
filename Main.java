@@ -1,5 +1,4 @@
-
-import java.util.Arrays;
+//import java.util.Arrays;
 import java.util.Scanner;
 
 public class Main {
@@ -16,7 +15,7 @@ public class Main {
 
         // convert password to an array of chars
         String[] passwordArray = password.split("");
-        System.out.println(Arrays.toString(passwordArray));
+        //System.out.println(Arrays.toString(passwordArray));
 
         // Criteria check: min 7 chars long
         if (passwordArray.length >= 6){
@@ -42,6 +41,19 @@ public class Main {
 
 
         // Criteria check: contains min 2 numbers
+        String[] numsList = {"0", "1", "2", "3", "4", "5", "6", "7", "8", "9"};
+        int numCount = 0;
+        for (int i = 0; i <= passwordArray.length-1; i++) {
+            for (int j = 0; j <= numsList.length - 1; j++) {
+                if (passwordArray[i].equals(numsList[j])) {
+                    numCount++;
+                }
+            }
+        }
+        //System.out.println(numCount);
+        if (numCount >= 2){
+            numbersOK = true;
+            }
 
 
         // final check i.e. evaluation of password
@@ -50,6 +62,5 @@ public class Main {
         } else {
             System.out.println("Password is WEAK.");
         }
-
     }
 }
