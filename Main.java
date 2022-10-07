@@ -1,4 +1,4 @@
-import java.sql.Array;
+
 import java.util.Arrays;
 import java.util.Scanner;
 
@@ -8,25 +8,44 @@ public class Main {
         System.out.print("Enter <PASSWORD>: ");
         String password = keyboard.nextLine();
 
-        // Initialising all check variables as failed to start with
+        // Initialising all check variables as failed to begin with
         boolean lengthOK = false;   // min 7 chars long
-        boolean numbersOK = false;  // min 2 numbers
-        boolean charsOK = false;    // '!', '@', '#', '$', '%', '&', '*'
+        boolean charsOK = false;    // contains min 2 chars {'!', '@', '#', '$', '%', '&', '*'}
+        boolean numbersOK = false;  // contains min 2 numbers
 
-        // password to array of chars:
+
+        // convert password to an array of chars
         String[] passwordArray = password.split("");
         System.out.println(Arrays.toString(passwordArray));
 
+        // Criteria check: min 7 chars long
         if (passwordArray.length >= 6){
             lengthOK = true;
-            System.out.println("length is >= 7");
+            //System.out.println("length is >= 7");
         }
 
 
+        // Criteria check: contains min 2 chars
+        String[] charsList = {"!", "@", "#", "$", "%", "&", "*"};
+        int charCount = 0;
+        for (int i = 0; i <= passwordArray.length-1; i++) {
+            for (int j = 0; j <= charsList.length - 1; j++) {
+                if (passwordArray[i].equals(charsList[j])) {
+                    charCount++;
+                }
+            }
+        }
+        //System.out.println(charCount);
+        if (charCount >= 2){
+            charsOK = true;
+        }
+
+
+        // Criteria check: contains min 2 numbers
 
 
         // final check i.e. evaluation of password
-        if (lengthOK && numbersOK && charsOK) {
+        if (lengthOK && charsOK && numbersOK) {
             System.out.println("STRONG Password detected.");
         } else {
             System.out.println("Password is WEAK.");
